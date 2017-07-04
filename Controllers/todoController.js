@@ -1,4 +1,25 @@
 var bodyParser=require('body-parser');
+var mongoose=require('mongoose');
+
+//Connect to the database
+mongoose.connect('mongodb://test:test@ds149132.mlab.com:49132/todo');
+
+//Create schema - a blue print for our data
+var todoSchema=new mongoose.Schema({
+  item:String
+});
+
+var Todo=mongoose.model('Todo', todoSchema);
+
+var item1=Todo({item:'test DB Item'}).save(function(err){
+  if(err) {
+    console.log('ERROR MAY DAY MAY DAY!!');
+    throw err;
+  }
+  console.log('item saved!');
+});
+
+
 var data=[
   {
     item:'get milk'
